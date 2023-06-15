@@ -46,6 +46,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+    - name: Copy Dockerfile
+      run: cp Dockerfile .
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Login to Docker Hub
