@@ -46,6 +46,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+    - name: List files in current directory
+      run: ls -a
     - name: Copy Dockerfile
       run: cp Dockerfile .
     - name: Set up Docker Buildx
