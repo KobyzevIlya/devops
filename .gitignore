@@ -30,3 +30,4 @@ target/maven-archiver
 target/maven-status
 .vscode/
 actions-runner/
+wsl-actions-runner/
