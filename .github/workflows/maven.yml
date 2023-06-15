@@ -20,6 +20,12 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
+      - name: Print current directory
+        run: pwd
+      - name: List files in current directory
+        run: ls -a
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
@@ -49,7 +55,7 @@ jobs:
     - name: Print current directory
       run: pwd
     - name: List files in current directory
-      run: ls -a ..
+      run: ls -a
     - name: Copy Dockerfile
       run: cp Dockerfile .
     - name: Set up Docker Buildx
