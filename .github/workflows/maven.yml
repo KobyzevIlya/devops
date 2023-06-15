@@ -1,5 +1,8 @@
 name: Java CI with Maven
 
+env:
+  DOCKER_IMAGE_TAG: kobyzevilya/testrep:latest
+
 on:
   push:
     branches: ["master"]
@@ -61,8 +64,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push Docker image
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v4
       with:
         context: .
         push: true
-        tags: kobyzevilya/testrep:latest
+        tags: ${{ env.DOCKER_IMAGE_TAG }}
+  
+  deploy:
+    needs: docker
+    runs-on: self-hosted
+    steps:
+      - name: Pull Docker Image
+        run: docker pull ${{ env.DOCKER_IMAGE_TAG }}
+      - name: Run Docker Image
+        run: docker run ${{ env.DOCKER_IMAGE_TAG }}
